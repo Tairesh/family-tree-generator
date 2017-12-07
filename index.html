@@ -35,6 +35,7 @@
 
     
 
+
     function rand(ar) {
         return ar[Math.floor(Math.random() * ar.length)];
     }
@@ -52,18 +53,18 @@
         }
     }
     var start = {
-        first: ["Ил", "Эл", "Ё", "Ге", "Джи", "Ро", "Ми", "Ар", "Ха", "Хе", "А", "Ка", "Эш", "Са"],
-        last: ["Ра", "Кви", "Ма", "Пот", "Дам", "Фин", "Си", "Ро", "Гон", "Э", "Ло", "Лу", "Ка", "Эл", "Эш", "Ар", "Джи"],
+        first: ["Ил", "Эл", "Ё", "Ге", "Джи", "Ро", "Ми", "Ар", "Ха", "Хе", "А", "Ка", "Эш", "Са", "И", "Е", "Эн", "Эм", "Ва", "Ал", "Кон", "О", "Ли", "Ле", "Ла", "Ло", "Э"],
+        last: ["Ра", "Кви", "Ма", "Пот", "Дам", "Фин", "Си", "Ро", "Гон", "Э", "Ло", "Лу", "Ка", "Эл", "Эш", "Ар", "Джи", "О", "Бу", "Ху", "А", "Ан", "Ар", "Ше", "Нор", "Рой", "Пу"],
         city: ["Хо", "Ло", "О", "Нью", "Эд", "Нор", "Дуб", "Бе", "Ли", "Ман", "Ре"]
     };
     var middle = {
-        first: ["", "рми", "и", "на", "э", "а", "е", "не", "ле", "хе", "ни", "р", "з", "с"],
-        last: ["", "зе", "фин", "вен", "ле", "р", "л", "т", "бле", "не", "лма", "ла", "ва", "х", "п"],
+        first: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "рми", "и", "на", "э", "а", "е", "не", "ле", "хе", "ни", "р", "з", "с", "ми", "си", "ек", "екс", "эк", "экс", "ста", "ли", "л"],
+        last: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "зе", "фин", "вен", "ле", "р", "л", "т", "бле", "не", "лма", "ла", "ва", "х", "п", "зм", "ман", "па", "сей", "ба"],
         city: ["", "г", "нг", "нд", "ин", "че", "вер", "л"]
     };
     var end = {
-        first: ["я", "н", "ни", "рва", "ри", "на", "ар", "ко", "а", "и", "э", "онд"],
-        last: ["рин", "дор", "клоу", "элл", "фой", "ер", "ган", "дур", "илл", "хан", "фор", "ор", "ин", "арт", "нс", "с"],
+        first: ["я", "н", "ни", "рва", "ри", "на", "ар", "ко", "а", "и", "э", "онд", "ли", "лий", "лия", "та", "тин", "ег", "андр"],
+        last: ["рин", "дор", "клоу", "элл", "фой", "ер", "ган", "дур", "илл", "хан", "фор", "ор", "ин", "арт", "нс", "с", "анд", "ид", "а", "ан", "рд", "ан"],
         city: ["смит", "дон", "форд", "касл", "бург", "виз", "ин", "фаст", "пул", "стир", "вилль"]
     };
     function randomName(t) {
@@ -276,7 +277,7 @@
             for (var i in constitutions) {
                 if (constitutions[i].code === constitution[0]) {
                     constitutionName = constitutions[i].name;
-                    weightValue = (gender === 'мужской' ? 75 : 60)*constitutions[i].weightFactor*(1+((Math.random()-0.5)/4));
+                    weightValue = (gender === 'мужской' ? 75 : 60)*constitutions[i].weightFactor*(1+((Math.random()-0.5)/6));
                     heightValue *= constitutions[i].heightFactor*(1+((Math.random()-0.5)/6));
                     break;
                 }
@@ -308,7 +309,7 @@
             genome += '|';
             var constitution = randomConstitution();
             genome += constitution.code+randomConstitution().code.toLowerCase();
-            var weight = (gender === 'мужской' ? 75 : 60)*constitution.weightFactor*(1+((Math.random()-0.5)/4));
+            var weight = (gender === 'мужской' ? 75 : 60)*constitution.weightFactor*(1+((Math.random()-0.5)/6));
             height *= constitution.heightFactor*(1+((Math.random()-0.5)/6));
             return {
                 genome: genome,
@@ -423,6 +424,9 @@
         {
             name: "хилый",
         },
+        {
+            name: "психопат",
+        }
     ];
     var traits = [
         {
@@ -433,12 +437,14 @@
             name: "красивый",
             blockedTraits: ["некрасивый", "толстый", "одноглазый", "однорукий", "одноногий"],
             minAge: 3,
+            genetical: true,
         },
         {
             name: "некрасивый",
             blockedTraits: ["красивый"],
             blockedProfessions: ["красивый мальчик", "красивая девочка", "проститутка"],
             minAge: 3,
+            genetical: true,
         },
         {
             name: "набожный",
@@ -461,12 +467,13 @@
             blockedTraits: ["игривый", "психопат"],
             minAge: 10,
         },
-//        {
-//            name: "толстый",
-//            blockedTraits: ["красивый", "быстрый", "стройный", "худой"],
-//            blockedProfessions: ["рэйнджер", "наёмник"],
-//            minAge: 5,
-//        },
+        {
+            name: "толстый",
+            blockedTraits: ["красивый", "быстрый", "стройный", "худой"],
+            blockedProfessions: ["рэйнджер", "наёмник"],
+            genetical: true,
+            minAge: 5,
+        },
         {
             name: "одноглазый",
             blockedTraits: ["красивый"],
@@ -474,6 +481,11 @@
         },
         {
             name: "однорукий",
+            blockedTraits: ["красивый"],
+            chance: 0.05,
+        },
+        {
+            name: "изуродованный",
             blockedTraits: ["красивый"],
             chance: 0.05,
         },
@@ -492,18 +504,21 @@
             blockedTraits: ["тупой"],
             blockedProfessions: ["местный дурачок", "тупой мальчик", "тупая девочка"],
             minAge: 3,
+            genetical: true,
         },
         {
             name: "тупой",
             blockedTraits: ["умный", "психопат", "талантливый"],
             blockedProfessions: ["талантливый мальчик", "талантливая девочка", "умная девочка", "умный мальчик", "учёный", "учитель"],
             minAge: 3,
+            genetical: true,
         },
         {
             name: "талантливый",
             blockedTraits: ["тупой"],
             blockedProfessions: ["местный дурачок", "тупой мальчик", "тупая девочка"],
             minAge: 3,
+            genetical: true,
         },
         {
             name: "быстрый",
@@ -516,11 +531,13 @@
             blockedTraits: ["хилый", "худой"],
             blockedProfessions: ["хилый мальчик", "хилая девочка"],
             minAge: 6,
+            genetical: true,
         },
         {
             name: "хилый",
             blockedTraits: ["сильный", "быстрый"],
             blockedProfessions: ["стеклодув", "охранник", "наёмник", "рэйнджер", "охотник", "каменщик", "столяр", "ювелир", "камнерез", "кузнец", "плотник", "резчик по кости", "бандит", "воровка", "сильный мальчик"],
+            genetical: true,
         },
         {
             name: "психопат",
@@ -530,6 +547,7 @@
             minAge: 5,
             maxAge: 15,
             chance: 0.5,
+            genetical: true,
         },
         {
             name: "педофил",
@@ -542,7 +560,7 @@
             name: "аутист",
             chance: 0.1,
             maxAge: 7,
-            blockedProfessions: ["рыбак", "охотник", "проститутка", "певец", "певица", "торговец", "продавец", "охранник", "каменщик", "столяр", "фермер", "мыловар", "ювелир", "камнерез", "кузнец", "повар", "пивовар", "бармен", "официантка", "хозяин таверны", "хозяйка таверны", "плотник", "резчик по кости", "учёный", "бандит", "воровка", "рэйнджер", "животновод", "наёмник", "учитель", "священник", "гончар", "мельник", "стеклодув", "жестянщик", "храбрый мальчик", "талантливый мальчик", "талантливая девочка", "умный мальчик", "умная девочка", "обычный мальчик", "обычная девочка"],
+            blockedProfessions: ["рыбак", "охотник", "проститутка", "певец", "певица", "торговец", "продавец", "охранник", "каменщик", "столяр", "фермер", "мыловар", "ювелир", "камнерез", "кузнец", "повар", "пивовар", "бармен", "официантка", "хозяин таверны", "хозяйка таверны", "плотник", "резчик по кости", "учёный", "бандит", "воровка", "рэйнджер", "животновод", "наёмник", "учитель", "священник", "гончар", "мельник", "стеклодув", "жестянщик", "храбрый мальчик", "талантливый мальчик", "талантливая девочка", "умный мальчик", "умная девочка", "обычный мальчик", "обычная девочка", "хулиган", "хулиганка"],
         },
         {
             name: "добрый",
@@ -557,6 +575,9 @@
 
     ];
     function checkTrait(person, result, trait) {
+        if (trait.genetical) {
+            return false;
+        }
         if (trait.blockedTraits) {
             for (var i in trait.blockedTraits) {
                 if (result.indexOf(trait.blockedTraits[i]) !== -1) {
@@ -630,7 +651,7 @@
         var traits = [];
         var genome = randomGenome(gender, motherGenome ? motherGenome.genome : false, fatherGenome ? fatherGenome.genome : false);
         var imt = genome.weight/((genome.height/100)*(genome.height/100));
-        if (imt >= 25) {
+        if (imt >= 28) {
             traits.push("толстый");
         } else if (imt < 20 && imt > 18) {
             traits.push("стройный");
@@ -665,6 +686,7 @@
             traits: traits,
             birth: birth,
             dead: dead,
+            migrated: false,
             deathReason: dead ? randomDeathReason() : false,
             age: function () {
                 return (this.dead ? this.dead : currentYear) - this.birth;
@@ -948,7 +970,7 @@
             for (var id in city.people) {
                 var person = city.people[id];
 
-                if (person.dead)
+                if (person.dead || person.migrated !== false)
                     continue;
 
                 // baby -> children evolution
@@ -1097,7 +1119,7 @@
                 } else if (person.gender === 'женский' && person.age() >= 12 && !person.pregrant && person.jailed === false) {
                     // make childrens
                     var chanceToPregrant = 0.01;
-                    if (husband && husband.jailed === false) {
+                    if (husband && husband.jailed === false && husband.migrated === false) {
                         chanceToPregrant += 0.9;
                     }
                     if (person.profession === "проститутка") {
@@ -1155,7 +1177,7 @@
                             var lovers = [];
                             for (var loverId in city.people) {
                                 var lover = city.people[loverId];
-                                if (lover.gender !== "мужской" || lover.dead || lover.age() < 16 || lover.age() > 50 || lover.jailed !== false || lover.hasTrait("некрасивый") || lover.hasTrait("аутист")) {
+                                if (lover.gender !== "мужской" || lover.dead || lover.migrated !== false || lover.age() < 16 || lover.age() > 50 || lover.jailed !== false || lover.hasTrait("некрасивый") || lover.hasTrait("аутист")) {
                                     continue;
                                 }
 
@@ -1227,10 +1249,10 @@
                         var girls = [];
                         for (var girlId in city.people) {
                             var girl = city.people[girlId];
-                            if (girl.gender !== 'женский' || girl.dead || girl.age() <= 16 || girl.profession === "монашка" || girl.profession === "проститутка" || girl.pregrant || girl.age() - 3 > person.age() || girl.jailed !== false) {
+                            if (girl.gender !== 'женский' || girl.dead || girl.migrated !== false || girl.age() <= 16 || girl.profession === "монашка" || girl.profession === "проститутка" || girl.pregrant || girl.age() - 3 > person.age() || girl.jailed !== false) {
                                 continue;
                             }
-                            if ((girl.hasTrait("вдовец") || girl.hasTrait("изнасилованный") || girl.hasTrait("опозоренный")) && Math.random() < 0.9) {
+                            if ((girl.hasTrait("вдовец") || girl.hasTrait("изнасилованный") || girl.hasTrait("опозоренный")) && Math.random() < 0.95) {
                                 continue;
                             }
                             
@@ -1360,13 +1382,13 @@
                         var victims = [];
                         for (var girlId in city.people) {
                             var girl = city.people[girlId];
-                            if (girl.dead || girl.age() > maxVictimAge || girl.age() < minVictimAge || girlId === id || (husband && girlId === husband.id) || girl.jailed !== false) {
-                                continue;
-                            }
                             if (girl.gender !== "женский" && !paedophile) {
                                 continue;
                             }
-                            if (girl.traits.indexOf("некрасивый") !== -1) {
+                            if (girl.dead || girl.migrated !== false || girl.age() > maxVictimAge || girl.age() < minVictimAge || girlId === id || (husband && girlId === husband.id) || girl.jailed !== false) {
+                                continue;
+                            }
+                            if (girl.traits.indexOf("некрасивый") !== -1 && Math.random() < 0.9) {
                                 continue;
                             }
 
@@ -1443,7 +1465,7 @@
                                     var victimFather = null;
                                     for (var i in victim.parents) {
                                         var victimParent = victim.parents[i];
-                                        if (victimParent.gender === "мужской" && !victimParent.dead) {
+                                        if (victimParent.gender === "мужской" && !victimParent.dead && victimParent.migrated === false) {
                                             victimFather = victimParent;
                                             break;
                                         }
@@ -1473,40 +1495,43 @@
 
                 // kills
                 if (person.age() >= 12 && person.jailed === false) {
-                    var chanceToWannaKillSomeone = Math.random() * 0.01;
+                    var chanceToWannaKillSomeone = 0.001;
                     var psychopath = person.hasTrait("психопат");
                     if (psychopath) {
-                        chanceToWannaKillSomeone += 0.05;
+                        chanceToWannaKillSomeone += 0.1;
                     }
                     if (person.hasTrait("злой")) {
-                        chanceToWannaKillSomeone += 0.03;
+                        chanceToWannaKillSomeone += 0.01;
                     }
                     if (person.profession === "бандит") {
                         chanceToWannaKillSomeone += 0.02;
                     }
-                    
 
                     if (Math.random() < chanceToWannaKillSomeone) {
                         // find a victim
                         var victim = false;
                         var victimReason = false;
                         if (person.profession !== "бандит") {
-                            if (husband && husband.jailed === false && !husband.dead && Math.random() < 0.5) {
+                            if (husband && husband.jailed === false && husband.dead === false && husband.migrated === false && Math.random() < 0.5) {
                                 victim = husband;
                                 victimReason = rand(["подозрение в измене", "семейная ссора"]);
                             } else if (person.childrens.length && Math.random() < 0.5) {
                                 for (var i in person.childrens) {
                                     var children = person.childrens[i];
-                                    if (!children.dead && children.jailed === false && Math.random() < 0.5) {
+                                    if (children.dead === false && children.migrated === false && children.jailed === false && Math.random() < 0.5) {
                                         victim = children;
-                                        victimReason = rand(["ссора с ребёнком", "непослушный ребёнок", "подозрение в том, что ребёнок не родной"]);
+                                        var reasons = ["ссора с ребёнком", "непослушный ребёнок"];
+                                        if (person.gender === "мужской") {
+                                            reasons.push("подозрение в том, что ребёнок не родной");
+                                        }
+                                        victimReason = rand(reasons);
                                         break;
                                     }
                                 }
                             } else if (person.parents.length) {
                                 for (var i in person.parents) {
                                     var parent = person.parents[i];
-                                    if (!parent.dead && Math.random() < 0.5) {
+                                    if (parent.dead === false && parent.jailed === false && parent.migrated === false && Math.random() < 0.5) {
                                         victim = parent;
                                         victimReason = "ссора с родителями";
                                         break;
@@ -1518,13 +1543,26 @@
                             var victims = [];
                             for (var victimId in city.people) {
                                 var potenVictim = city.people[victimId];
-                                if (!potenVictim.dead && victimId !== id) {
+                                if (victimId !== id && !potenVictim.dead && potenVictim.migrated === false && victimId !== id && potenVictim.age() > 11) {
                                     victims.push(potenVictim);
                                 }
                             }
                             if (victims.length) {
                                 victim = rand(victims);
-                                victimReason = rand(["ограбление", "ссора", "отказ в близости"]);
+                                var reasons = ["ссора", "случайность"];
+                                if (person.profession === "бандит" || person.profession === "воровка" || psychopath) {
+                                    reasons.push("ограбление"); 
+                                }
+                                if (person.gender !== victim.gender && victim.age()-3 < person.age()) {
+                                    reasons.push("отказ в близости");
+                                }
+                                if (victim.hasTrait("психопат") || victim.hasTrait("педофил") || victim.profession === "хулиган" || victim.profession === "хулиганка" || victim.profession === "бандит" || victim.profession === "воровка") {
+                                    reasons.push("воздаяние за грехи");
+                                }
+                                if (victim.profession === "староста") {
+                                    reasons.push("зависть");
+                                }
+                                victimReason = rand(reasons);
                             }
                         }
                         if (victim) {
@@ -1652,16 +1690,55 @@
                         if (Math.random() < chanceToBreak) {
                             person.jailed = false;
                             person.profession = person.professionBackup;
-                            console.log(person.name()+' сбегает из тюрьмы отсидев '+delta+' лет');
+                            person.migrated = currentYear;
+                            console.log(person.name()+' сбегает из тюрьмы отсидев '+delta+' лет и исчезает из города');
+                            continue;
                         }
                     }
                 }
+                
+                // migrations out
+                if (person.jailed === false && person.age() > 15 && person.age() < 30 && person.profession !== "староста" && person.profession !== "местный дурачок") {
+                    var chanceToMigration = 0.001;
+                    if (person.gender === "мужской") {
+                        chanceToMigration *= 2;
+                    }
+                    if (person.age() < 20) {
+                        chanceToMigration *= 2;
+                    }
+                    if (person.hasTrait("опозоренный")) {
+                        chanceToMigration *= 2;
+                    }
+                    if (person.hasTrait("изнасилованный")) {
+                        chanceToMigration *= 2;
+                    }
+                    if (Math.random() < chanceToMigration) {
+                        var family = [];
+                        if (husband) {
+                            family.push(husband);
+                        }
+                        for (var i in person.childrens) {
+                            var children = person.childrens[i];
+                            if (!children.dead && children.jailed === false && children.migrated === false && children.age() < 16) {
+                                family.push(children);
+                            }
+                        }
+                        person.migrated = currentYear;
+                        console.log(person.age()+'-летн'+(person.gender === 'мужской'?'ий':'яя')+' '+person.profession+' '+person.name()+' покидает город в поисках лучшей жизни');
+                        for (var i in family) {
+                            var closer = family[i];
+                            closer.migrated = currentYear;
+                            console.log(closer.age()+'-летн'+(closer.gender === 'мужской'?'ий':'яя')+' '+closer.profession+' '+closer.name()+' отправляется вместе с н'+(person.gender === "мужской" ? 'им' : 'ей'));
+                        }
+                    }
+                }
+                
             
                 // end check person
             }
             
             // migrations in
-            if (Math.random() < 0.1) {
+            if (Math.random() < 0.03) {
                 var migrantsCount = Math.round(Math.random()*3)+1;
                 for (var i = 0; i < migrantsCount; i++) {
                     var migrant = randomNPC(false, false, currentYear - 30, currentYear - 14, 50);
@@ -1671,11 +1748,11 @@
             }
             
             // elect new head
-            if (!city.nobles.head || city.nobles.head.dead || city.nobles.head.jailed !== false) {
+            if (!city.nobles.head || city.nobles.head.dead || city.nobles.head.jailed !== false || city.nobles.head.migrated !== false) {
                 var candidates = [];
                 for (var id in city.people) {
                     var person = city.people[id];
-                    if (person.dead || person.profession === "проститутка" || person.profession === "бандит" || person.hasTrait("опозоренный")|| person.jailed !== false || person.hasTrait("аутист")) {
+                    if (person.dead !== false || person.migrated !== false || person.profession === "проститутка" || person.profession === "бандит" || person.hasTrait("опозоренный")|| person.jailed !== false || person.hasTrait("аутист")) {
                         continue;
                     }
                     var balls = 0;
@@ -1751,7 +1828,7 @@
         city.town.females = 0;
         for (var id in city.people) {
             var person = city.people[id];
-            if (!person.dead) {
+            if (person.dead === false && person.migrated === false) {
                 city.town.population++;
                 if (person.gender === "мужской") {
                     city.town.males++;
@@ -1787,7 +1864,7 @@
     }
     function viewTree(items) {
         $("#basicdiagram").remove();
-        $('#viewblock').append('<div id="basicdiagram" style="width: 100%; height: 100%; background-color:white;"></div>');
+        $('#viewblock').append('<div id="basicdiagram" style="width: 100%; height: 4000px; border-style: dotted; border-width: 1px; background-color: white;"></div>');
         var options = new primitives.famdiagram.Config();
         options.items = items;
         options.cursorItem = 2;
